@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: blue; 
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .nav a {
+            margin: 0 10px;
+            font-size: 18px;
+            text-decoration: none;
+            color: white; /* text contrast on blue */
+            cursor: pointer;
+        }
+
+        .nav a:hover {
+            color: rgb(255, 255, 255);
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 40px;
+            animation: float 3s linear forwards;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-300px); opacity: 0; }
+        }
+
+        #surprise {
+            font-size: 35px;
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0;
+            color: white;
+            transition: opacity 0.5s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav">
+        <a onclick="showAction()">Home</a> |
+        <a href="Download.html">Download</a> |
+        <a href="Help.html">Help</a>
+    </div>
+
+    <h1 style="text-align:center; color:white;">
+        Welcome to Home Page
+    </h1>
+
+    <div id="surprise">🎉 Surprise!!! 🎉</div>
+
+    <script>
+        function showAction() {
+            let s = document.getElementById("surprise");
+
+            // Reset surprise text so it shows every click
+            s.style.opacity = "0";
+            s.style.display = "block";
+
+            // Force reflow so transition works
+            void s.offsetWidth;
+
+            // Fade in
+            s.style.opacity = "1";
+
+            // Create floating balloons
+            for (let i = 0; i < 6; i++) {
+                let b = document.createElement("div");
+                b.className = "balloon";
+                b.innerHTML = "🎈";
+                b.style.left = Math.random() * (window.innerWidth - 50) + "px";
+                b.style.top = "300px";
+                document.body.appendChild(b);
+
+                // Remove balloon after animation
+                setTimeout(() => b.remove(), 3000);
+            }
+        }
+    </script>
+
+</body>
+</html>
